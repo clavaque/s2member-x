@@ -63,13 +63,13 @@ if(!defined('WPINC'))
 
 				<h3><?php echo $this->translate('Account Activation Required'); ?></h3>
 				<p>
-					<?php echo sprintf($this->translate('Activation Link: (<a href="%1$s">CLICK HERE</a> to activate now).'), esc_attr($this->data->activation_link)); ?><br />
+					<?php echo sprintf($this->translate('Activation Link: (<a href="%1$s">CLICK HERE</a> to activate now).'), esc_attr($this->data->activation_url)); ?><br />
 					<?php echo $this->translate('NOTE: You MUST click this link for your account to become active.'); ?>
 				</p>
 
 				<p>
 					<?php echo $this->translate('If you have any trouble, please try this alternative:'); ?><br />
-					<a href="<?php echo esc_attr($this->data->activation_short_link); ?>"><?php echo esc_html($this->data->activation_short_link); ?></a>
+					<a href="<?php echo esc_attr($this->data->activation_short_url); ?>"><?php echo esc_html($this->data->activation_short_url); ?></a>
 				</p>
 
 				<!-- / END: Message Body -->

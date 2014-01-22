@@ -44,6 +44,21 @@ s2Member® X. A free membership management plugin for WordPress®.
 
 You can learn more about s2Member® X at [s2Member.com/x](http://www.s2member.com/x/).
 
+== License ==
+
+Copyright: © 2013 [WebSharks, Inc.](http://www.websharks-inc.com/bizdev/) (coded in the USA)
+
+Released under the terms of the [GNU General Public License](http://www.gnu.org/licenses/gpl-2.0.html).
+
+= Credits / Additional Acknowledgments =
+
+* Software designed for WordPress®.
+	- GPL License <http://codex.wordpress.org/GPL>
+	- WordPress® <http://wordpress.org>
+* JavaScript extensions require jQuery.
+	- GPL License <http://jquery.org/license>
+	- jQuery <http://jquery.com/>
+
 == Changelog ==
 
 = v000000-dev =

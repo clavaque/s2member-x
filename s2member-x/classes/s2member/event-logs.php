@@ -210,8 +210,7 @@ namespace s2member
 								" AND `event_log`.`user_passtag_id` IS NOT NULL".
 								" AND `event_log`.`user_passtag_id` > '0')";
 
-							if(empty($where['user']))
-								return 0; // There is nothing to go by.
+							if(empty($where['user'])) return 0; // Nothing to go by.
 
 							$where['user'] = '('.implode(' OR ', $where['user']).')'; // Either/OR :-)
 
@@ -250,8 +249,7 @@ namespace s2member
 								" AND `event_log`.`passtag_id` IS NOT NULL".
 								" AND `event_log`.`passtag_id` > '0')";
 
-							if(empty($where['passtag']))
-								return 0; // There is nothing to go by.
+							if(empty($where['passtag'])) return 0; // Nothing to go by.
 
 							$where['passtag'] = '('.implode(' AND ', $where['passtag']).')'; // Both :-)
 

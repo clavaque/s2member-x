@@ -63,12 +63,12 @@ if(!defined('WPINC'))
 
 				<h3><?php echo $this->translate('Password Reset Request'); ?></h3>
 				<p>
-					<?php echo sprintf($this->translate('Password Reset Link: (<a href="%1$s">CLICK HERE</a> to reset your password).'), esc_attr($this->data->password_reset_link)); ?><br />
+					<?php echo sprintf($this->translate('Password Reset Link: (<a href="%1$s">CLICK HERE</a> to reset your password).'), esc_attr($this->data->password_reset_url)); ?><br />
 				</p>
 
 				<p>
 					<?php echo $this->translate('If you have any trouble, please try this alternative:'); ?><br />
-					<a href="<?php echo esc_attr($this->data->password_reset_short_link); ?>"><?php echo esc_html($this->data->password_reset_short_link); ?></a>
+					<a href="<?php echo esc_attr($this->data->password_reset_short_url); ?>"><?php echo esc_html($this->data->password_reset_short_url); ?></a>
 				</p>
 
 				<!-- / END: Message Body -->

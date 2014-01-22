@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: internal-db.s91896.gridserver.com
--- Generation Time: Jul 03, 2013 at 02:01 PM
+-- Generation Time: Jul 04, 2013 at 01:42 PM
 -- Server version: 5.1.55-rel12.6
 -- PHP Version: 5.3.23
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `s2_behavior_types` (
   PRIMARY KEY (`ID`),
   UNIQUE KEY `unique_behavior_type` (`type`),
   FULLTEXT KEY `ft_searchable_type_label` (`type`,`label`)
-) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=36 ;
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=37 ;
 
 --
 -- Dumping data for table `s2_behavior_types`
@@ -48,34 +48,35 @@ INSERT INTO `s2_behavior_types` (`ID`, `type`, `label`) VALUES
 (5, 'notification', 'Send HTTP Notification'),
 (6, 'passtag', 'Add/Remove Passtag'),
 (7, 'redirect', 'Redirect Browser'),
-(8, 'add_user_passtag', 'Add User Passtag'),
-(9, 'add_user_passtag_x', 'Add User Passtag (X)'),
-(10, 'remove_user_passtag', 'Remove User Passtag'),
-(11, 'remove_user_passtag_x', 'Remove User Passtag (X)'),
-(12, 'renew_user_passtag', 'Renew User Passtag'),
-(13, 'renew_aggregate_user_passtags', 'Renew Aggregate User Passtags'),
-(14, 'renew_all_user_passtags', 'Renew All User Passtags'),
-(15, 'deactivate_user_passtag', 'Deactivate User Passtag'),
-(16, 'deactivate_aggregate_user_passtags', 'Deactivate Aggregate User Passtags'),
-(17, 'deactivate_all_user_passtags', 'Deactivate All User Passtags'),
-(18, 'reactivate_user_passtag', 'Reactivate User Passtag'),
-(19, 'reactivate_aggregate_user_passtags', 'Reactivate Aggregate User Passtags'),
-(20, 'reactivate_all_user_passtags', 'Reactivate All User Passtags'),
-(21, 'delete_user_passtag', 'Delete User Passtag'),
-(22, 'delete_aggregate_user_passtags', 'Delete Aggregate User Passtags'),
-(23, 'delete_all_user_passtags', 'Delete All User Passtags'),
-(24, 'esp_subscribe', 'ESP Subscribe'),
-(25, 'esp_silent_subscribe', 'ESP Subscribe (Silently)'),
-(26, 'esp_unsubscribe', 'ESP Unsubscribe'),
-(27, 'esp_silent_unsubscribe', 'ESP Unsubscribe (Silently)'),
-(28, 'esp_transition', 'ESP Transition'),
-(29, 'esp_transition_subscribe', 'ESP Transition/Subscribe'),
-(30, 'esp_silent_transition_subscribe', 'ESP Transition/Subscribe (Silently)'),
-(31, 'esp_sync_profile', 'ESP Synchronize Profile Data'),
-(32, 'activate_status', 'Activate Status'),
-(33, 'deactivate_status', 'Deactivate Status'),
-(34, 'reactivate_status', 'Reactivate Status'),
-(35, 'delete_status', 'Delete Status');
+(8, 'status', 'Change Status'),
+(9, 'activate_status', 'Activate Status'),
+(10, 'deactivate_status', 'Deactivate Status'),
+(11, 'reactivate_status', 'Reactivate Status'),
+(12, 'delete_status', 'Delete Status'),
+(13, 'add_user_passtag', 'Add User Passtag'),
+(14, 'add_user_passtag_x', 'Add User Passtag (X)'),
+(15, 'remove_user_passtag', 'Remove User Passtag'),
+(16, 'remove_user_passtag_x', 'Remove User Passtag (X)'),
+(17, 'renew_user_passtag', 'Renew User Passtag'),
+(18, 'renew_aggregate_user_passtags', 'Renew Aggregate User Passtags'),
+(19, 'renew_all_user_passtags', 'Renew All User Passtags'),
+(20, 'deactivate_user_passtag', 'Deactivate User Passtag'),
+(21, 'deactivate_aggregate_user_passtags', 'Deactivate Aggregate User Passtags'),
+(22, 'deactivate_all_user_passtags', 'Deactivate All User Passtags'),
+(23, 'reactivate_user_passtag', 'Reactivate User Passtag'),
+(24, 'reactivate_aggregate_user_passtags', 'Reactivate Aggregate User Passtags'),
+(25, 'reactivate_all_user_passtags', 'Reactivate All User Passtags'),
+(26, 'delete_user_passtag', 'Delete User Passtag'),
+(27, 'delete_aggregate_user_passtags', 'Delete Aggregate User Passtags'),
+(28, 'delete_all_user_passtags', 'Delete All User Passtags'),
+(29, 'esp_subscribe', 'ESP Subscribe'),
+(30, 'esp_silent_subscribe', 'ESP Subscribe (Silently)'),
+(31, 'esp_unsubscribe', 'ESP Unsubscribe'),
+(32, 'esp_silent_unsubscribe', 'ESP Unsubscribe (Silently)'),
+(33, 'esp_transition', 'ESP Transition'),
+(34, 'esp_transition_subscribe', 'ESP Transition/Subscribe'),
+(35, 'esp_silent_transition_subscribe', 'ESP Transition/Subscribe (Silently)'),
+(36, 'esp_sync_profile', 'ESP Synchronize Profile Data');
 
 -- --------------------------------------------------------
 
@@ -441,7 +442,7 @@ CREATE TABLE IF NOT EXISTS `s2_event_log` (
   `time` int(10) unsigned NOT NULL COMMENT 'Time this event took place.',
   `process_time` int(10) unsigned DEFAULT NULL COMMENT 'Time to process this event occurrence (applicable only if this event occurrence has not yet been processed).',
   `processed_time` int(10) NOT NULL DEFAULT '0' COMMENT 'Time this event was processed (0 indicates unprocessed; e.g. it is still awaiting processing). If logging an instance only (i.e. NOT processing; only tracking nth occurrences) set this to -1 to indicate it''s a processed instance.',
-  `unique_sha1` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'An SHA1 hash identifying all unique aspects of the event process that logged this entry. This MUST be generated dynamically, and with careful consideration. Considerations should include (at a minimum) the event ID and serialized meta vars.',
+  `unique_sha1` varchar(40) COLLATE utf8_unicode_ci NOT NULL COMMENT 'SHA1 hash identifying all unique aspects of the event process that logged this entry. This MUST be generated dynamically, and with careful consideration. Considerations should include (at a minimum) the event ID and serialized meta vars.',
   PRIMARY KEY (`ID`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 

@@ -62,6 +62,8 @@ DROP TABLE IF EXISTS `s2_tax_rates`;
 DROP TABLE IF EXISTS `s2_transactions`;
 DROP TABLE IF EXISTS `s2_transaction_meta`;
 
+DROP TABLE IF EXISTS `s2_unsubscribes`;
+
 DROP TABLE IF EXISTS `s2_user_login_log`;
 DROP TABLE IF EXISTS `s2_user_passtags`;
 DROP TABLE IF EXISTS `s2_user_passtag_log`;

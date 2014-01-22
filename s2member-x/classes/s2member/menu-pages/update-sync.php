@@ -64,7 +64,7 @@ namespace s2member\menu_pages
 						$url = $response; // We got the update URL.
 					else $errors = $response;
 
-					$this->©action->set_call_data_for('©menu_pages__update_sync.®update_framework', get_defined_vars());
+					$this->©action->set_call_data_for($this->dynamic_call(__FUNCTION__), get_defined_vars());
 
 					if(!empty($url)) // We got the update URL. Perform the update now.
 						wp_redirect($url).exit();
@@ -89,7 +89,7 @@ namespace s2member\menu_pages
 						$url = $response; // We got the update URL.
 					else $errors = $response;
 
-					$this->©action->set_call_data_for('©menu_pages__update_sync.®update_sync_pro', get_defined_vars());
+					$this->©action->set_call_data_for($this->dynamic_call(__FUNCTION__), get_defined_vars());
 
 					if(!empty($url)) // We got the update URL. Perform the update now.
 						wp_redirect($url).exit();

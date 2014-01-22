@@ -724,7 +724,7 @@ namespace s2member
 
 								$this->©cookie->set(TEST_COOKIE, '1', 0);
 
-								extract((array)$this->©action->get_call_data_for('©user_utils.®login'));
+								extract((array)$this->©action->get_call_data_for($this->dynamic_call('®login')));
 
 								if(isset($_r['loggedout']) || isset($_r['logged_out']))
 									$messages = $this->©message(
@@ -756,7 +756,6 @@ namespace s2member
 										$this->method(__FUNCTION__).'#log_back_in_after_wp_update', get_defined_vars(),
 										$this->translate('You have successfully updated WordPress®. Please log back in.')
 									);
-
 								$this->©headers->clean_status_type(200, 'text/html', TRUE);
 								exit($this->©template('login.php', get_defined_vars())->content);
 
@@ -774,7 +773,7 @@ namespace s2member
 								if((force_ssl_login() || force_ssl_admin()) && !is_ssl())
 									wp_redirect($this->©url->current('https')).exit();
 
-								extract((array)$this->©action->get_call_data_for('©user_utils.®lost_password'));
+								extract((array)$this->©action->get_call_data_for($this->dynamic_call('®lost_password')));
 
 								$this->©headers->clean_status_type(200, 'text/html', TRUE);
 								exit($this->©template('lost-password.php', get_defined_vars())->content);
@@ -795,7 +794,7 @@ namespace s2member
 								if((force_ssl_login() || force_ssl_admin()) && !is_ssl())
 									wp_redirect($this->©url->current('https')).exit();
 
-								extract((array)$this->©action->get_call_data_for('©user_utils.®reset_password'));
+								extract((array)$this->©action->get_call_data_for($this->dynamic_call('®reset_password')));
 
 								$this->©headers->clean_status_type(200, 'text/html', TRUE);
 								exit($this->©template('reset-password.php', get_defined_vars())->content);
@@ -1072,7 +1071,8 @@ namespace s2member
 					$this->©db->delete($this->©db_tables->get('user_passtags'), array('user_id' => $user->ID));
 					$this->©db->delete($this->©db_tables->get('user_profile_fields'), array('user_id' => $user->ID));
 					$this->©db->delete($this->©db_tables->get('user_login_log'), array('user_id' => $user->ID));
-					$this->©db->delete($this->©db_tables->get('event_status_ctrls'), array('user_id' => $user->ID));
+					$this->©db->delete($this->©db_tables->get('unsubscribes'), array('user_id' => $user->ID));
+					$this->©db->delete($this->©db_tables->get('unsubscribes'), array('email' => $user->email));
 					$this->©db->update($this->©db_tables->get('event_log'), // Delete (but not really).
 					                   array('status' => 'deleted'), array('user_id' => $user->ID));
 				}

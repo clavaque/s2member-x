@@ -190,6 +190,7 @@ namespace s2member
 								'wp_lost_password'
 							);
 							$force_ssl_login      = (force_ssl_login() || force_ssl_admin());
+							// TODO Update handling of force_ssl_login which only affects the actual POST process.
 
 							foreach($urls as $_key => &$_url)
 								{

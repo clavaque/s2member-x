@@ -94,7 +94,6 @@ namespace s2member
 					add_shortcode($plugin_prefix.'login', array($this, '©shortcodes__login.do_shortcode'));
 					add_shortcode($plugin_prefix.'profile_summary', array($this, '©shortcodes__profile_summary.do_shortcode'));
 					add_shortcode($plugin_prefix.'profile_update', array($this, '©shortcodes__profile_update.do_shortcode'));
-					// @TODO Put other shortcodes back in here once I'm done testing them.
 
 					// Event triggers (connected to other actions).
 

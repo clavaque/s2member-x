@@ -106,6 +106,8 @@ namespace s2member
 						'transactions',
 						'transaction_meta',
 
+						'unsubscribes',
+
 						'user_login_log',
 						'user_passtags',
 						'user_passtag_log',

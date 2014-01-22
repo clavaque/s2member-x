@@ -208,6 +208,11 @@ namespace s2member
 				 * @method \s2member\systematics ©systematics()
 				 * @method \s2member\systematics ©systematic()
 				 *
+				 * @property \s2member\unsubscribes                        $©unsubscribes
+				 * @property \s2member\unsubscribes                        $©unsubscribe
+				 * @method \s2member\unsubscribes ©unsubscribes()
+				 * @method \s2member\unsubscribes ©unsubscribe()
+				 *
 				 * @property \s2member\users                               $©users
 				 * @property \s2member\users                               $©user
 				 * @method \s2member\users ©users()
@@ -253,6 +258,7 @@ namespace s2member
 						'profile_field_validation_pattern' => 'profile_field_validation_patterns',
 						'restriction_type'                 => 'restriction_types',
 						'systematic'                       => 'systematics',
+						'unsubscribe'                      => 'unsubscribes',
 						'user'                             => 'users'
 					);
 				}

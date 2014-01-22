@@ -133,27 +133,36 @@ namespace s2member
 
 					goto finale; // NOT related to any.
 
-					# Is it time to process this event, or should we stop here?
+					# Is it time to process this event, or no?
 
-					check_offset_time: // Target point.
+					check_offset_time: // Target point (we also validate `offset_time` here).
 
-					if($handler->offset_time >= 0 && $event_type->includes_futuristic_time) goto finale; // NOT applicable.
-					if($handler->offset_time < 0 && (!$event_type->includes_futuristic_time || !isset($meta_vars['futuristic_time'])))
-						goto finale; // NOT applicable. Negative offset times work only w/ futuristic event types.
+					if(isset($meta_vars['futuristic_time']) && $handler->offset_time >= 0) goto finale;
+					if(!isset($meta_vars['futuristic_time']) && $handler->offset_time < 0) goto finale;
 
 					if($reprocessing_log_id) $handler->offset_time = 0; // If reprocessing; time is now :-)
 
-					if($handler->offset_time < 0) // This IS a futuristic event type?
+					if(isset($meta_vars['futuristic_time']) && $handler->offset_time < 0) // Futuristic?
 						if($meta_vars['futuristic_time'] - time() > abs($handler->offset_time))
 							goto finale; // Too far in the future (wait for next trigger).
 						else $handler->offset_time = 0; // The time is now :-)
+
+					# Does this event trigger overlap?
+
+					check_consolidate_overlapping: // Target point.
+
+					if($handler->consolidate && $this->is_overlapping($handler->ID, $meta_vars, $vars))
+						goto finale; // Nothing to do in this case.
 
 					# Does this handler have any behaviors?
 
 					check_active_behaviors: // Target point.
 
-					if(!($behaviors = $this->©event_behaviors->active_for($handler->ID, $meta_vars)))
-						goto finale; // There are no active behaviors; ignore :-)
+					foreach(($behaviors = $this->©event_behaviors->for_($handler->ID)) as $_key => $_behavior)
+						if($_behavior->status !== 'active' || $_behavior->behavior_type_id <= 1) unset($behaviors[$_key]);
+					unset($_key, $_behavior); // Behavior types `0` and `1` indicate `none`; or a default behavior.
+
+					if(!$behaviors) goto finale; // No active behaviors; ignore :-)
 
 					# Is this a unique event for this handler? Do we even care?
 
@@ -241,12 +250,6 @@ namespace s2member
 						case 'redirect': // Redirect behaviors; see {@link event_redirect_behaviors}.
 
 								$this->©event_redirect_behaviors->process_all($_behavior->ID, $meta_vars, $vars);
-
-								break; // Break switch handler.
-
-						case 'status': // Status behaviors; see {@link event_status_behaviors}.
-
-								$this->©event_status_behaviors->process_all($_behavior->ID, $meta_vars, $vars);
 
 								break; // Break switch handler.
 
@@ -459,6 +462,44 @@ namespace s2member
 				}
 
 			/**
+			 * Checks for an overlapping event trigger.
+			 *
+			 * @param integer|string $id_or_name An event handler ID or name.
+			 *
+			 * @param array          $meta_vars Meta vars/data specific to this event (see below).
+			 *
+			 * @param array          $vars Variables defined in the scope of the calling routine.
+			 *
+			 * @return boolean TRUE if the event is overlapping in some way.
+			 *
+			 * @throws exception If invalid types are passed through arguments list.
+			 * @throws exception If ``$id_or_name`` is empty for some reason.
+			 * @throws exception If ``$meta_vars`` is empty.
+			 */
+			public function is_overlapping($id_or_name, $meta_vars, $vars)
+				{
+					$this->check_arg_types(array('integer:!empty', 'string:!empty'), 'array:!empty', 'array', func_get_args());
+
+					if(!($handler = $this->get($id_or_name)))
+						throw $this->©exception( // Exception!
+							$this->method(__FUNCTION__).'#handler_missing', get_defined_vars(),
+							sprintf($this->i18n('Missing event handler ID/name: `$1%s`.'), $id_or_name)
+						);
+					if(isset($meta_vars['user'])) // For IDEs; properties/methods.
+						$meta_vars['user'] = $this->©user_utils->which($meta_vars['user']);
+
+					switch($handler->event_type) // Most conflicts are detected first by event type.
+					{
+						case 'user_reaches_passtag_time_stops': // See {@link passtag_restrictions}.
+						case 'user_reaches_passtag_uses_limit':
+						case 'user_reaches_passtag_ips_limit':
+
+								break; // Break switch handler.
+					}
+					return FALSE; // Not overlapping.
+				}
+
+			/**
 			 * Checks for a conflicting event handler behavior.
 			 *
 			 * @param integer|string $id_or_name An event handler ID or name.
@@ -530,7 +571,7 @@ namespace s2member
 					}
 					switch($behavior_type->type) // Other checks first by behavior type.
 					{
-						case 'redirect': // Redirects are one of the most tricky behaviors to consider.
+						case 'redirect': // Redirects are one of the trickiest behaviors to consider.
 
 								if($handler->offset_time) return TRUE; // Not possible.
 

@@ -88,8 +88,6 @@ namespace s2member
 			/**
 			 * Unsubscribes an email address.
 			 *
-			 * @extenders This MUST be defined by class extenders.
-			 *
 			 * @param null|string|array           $segment Segment specs. Defaults to a NULL value.
 			 *    NULL, a string, or an already parsed array of segment specs. A NULL value indicates an unsubscribe from ALL subscribed segments.
 			 *    In other words, a NULL value indicates that an unsubscribe should occur for each of the user's currently subscribed segments.
@@ -117,8 +115,6 @@ namespace s2member
 
 			/**
 			 * Moves an email address from one segment to another.
-			 *
-			 * @extenders This MUST be defined by class extenders.
 			 *
 			 * @param null|string|array           $old_segment Old segment specs.
 			 *    NULL, a string, or an already parsed array of segment specs (e.g. to specify a specific segment).
