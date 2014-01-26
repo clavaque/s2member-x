@@ -13,7 +13,7 @@ Uses WebSharks Core: websharks-core-v000000-dev
 
 Copyright: © 2012 WebSharks, Inc.
 License: GNU General Public License
-Contributors: WebSharks
+Contributors: WebSharks, JasWSInc
 
 Author: s2Member® / WebSharks, Inc.
 Author URI: http://www.s2member.com
