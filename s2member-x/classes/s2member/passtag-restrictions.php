@@ -54,14 +54,14 @@ namespace s2member
 			/**
 			 * Checks front-side or admin-side passtag restrictions (based on context).
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -80,14 +80,14 @@ namespace s2member
 			/**
 			 * Checks front-side passtag restrictions.
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -115,14 +115,14 @@ namespace s2member
 			/**
 			 * Checks administrative passtag restrictions.
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -141,17 +141,17 @@ namespace s2member
 			/**
 			 * Check all passtag restrictions that guard a post.
 			 *
-			 * @param null|integer                 $post_id A WordPress® post ID.
+			 * @param null|integer                $post_id A WordPress® post ID.
 			 *    Defaults to a NULL value (indicating the current post, possibly in "the loop").
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -182,7 +182,7 @@ namespace s2member
 						throw $this->©exception( // Should NOT happen.
 							$this->method(__FUNCTION__).'#post_missing', get_defined_vars(),
 							$this->i18n('Unable to acquire `$post` object properties.').
-							sprintf($this->i18n(' Post ID: `%1$s`.'), $post_id)
+							' '.sprintf($this->i18n('Post ID: `%1$s`.'), $post_id)
 						);
 					// Check post against public systematics.
 
@@ -273,20 +273,20 @@ namespace s2member
 			/**
 			 * Check all passtag restrictions that guard a taxonomy term.
 			 *
-			 * @param null|string                  $taxonomy A WordPress® taxonomy type.
+			 * @param null|string                 $taxonomy A WordPress® taxonomy type.
 			 *    Defaults to a NULL value (indicating the current taxonomy).
 			 *
-			 * @param null|integer                 $term_id A WordPress® term ID.
+			 * @param null|integer                $term_id A WordPress® term ID.
 			 *    Defaults to a NULL value (indicating the current taxonomy term ID).
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -319,7 +319,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#taxonomy_term_missing', get_defined_vars(),
 							$this->i18n('Unable to acquire taxonomy `$term` object properties.').
-							sprintf($this->i18n(' Taxonomy: `%1$s`; term ID: `%2$s`.'), $taxonomy, $term_id)
+							' '.sprintf($this->i18n('Taxonomy: `%1$s`; term ID: `%2$s`.'), $taxonomy, $term_id)
 						);
 					// Check taxonomy term, and perhaps ancestors.
 
@@ -356,17 +356,17 @@ namespace s2member
 			/**
 			 * Check URI passtag restrictions that guard a particular URI.
 			 *
-			 * @param null|string                  $uri A partial URL (i.e. a URI).
+			 * @param null|string                 $uri A partial URL (i.e. a URI).
 			 *    Defaults to a NULL value (indicating the current URI).
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -394,7 +394,7 @@ namespace s2member
 					if(empty($uri)) // Missing URI? This should NOT happen.
 						throw $this->©exception($this->method(__FUNCTION__).'#uri_missing', get_defined_vars(),
 						                        $this->i18n('Unable to acquire `$uri` (value empty).').
-						                        sprintf($this->i18n(' Got: `%1$s`.'), $uri)
+						                        ' '.sprintf($this->i18n('Got: `%1$s`.'), $uri)
 						);
 					// Checks a partial URL (i.e. a URI).
 
@@ -410,14 +410,14 @@ namespace s2member
 			/**
 			 * Check IP passtag restrictions against a particular user.
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -450,17 +450,17 @@ namespace s2member
 			/**
 			 * Check media passtag restrictions that guard a particular file.
 			 *
-			 * @param null|string                  $file A media file (relative path).
+			 * @param null|string                 $file A media file (relative path).
 			 *    Defaults to a NULL value (indicating the current media file).
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -488,7 +488,7 @@ namespace s2member
 					if(empty($file)) // File is missing? This should NOT happen.
 						throw $this->©exception($this->method(__FUNCTION__).'#file_missing', get_defined_vars(),
 						                        $this->i18n('Unable to acquire `$file` (value empty).').
-						                        sprintf($this->i18n(' Got: `%1$s`.'), $file)
+						                        ' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					// Check media file (based on relative path).
 
@@ -513,16 +513,16 @@ namespace s2member
 			/**
 			 * Check profile field passtag restrictions that guard a particular profile field ID.
 			 *
-			 * @param integer                      $profile_field_id A profile field ID.
+			 * @param integer                     $profile_field_id A profile field ID.
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable).
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
 			 * @return array|null|boolean Possible return values include: an array of failures, TRUE, NULL, FALSE.
@@ -564,40 +564,40 @@ namespace s2member
 			/**
 			 * Checks common front/admin passtag restrictions, and handles finale/behaviors.
 			 *
-			 * @param null|string                  $uri Optional. A full URL (or a partial URI).
+			 * @param null|string                 $uri Optional. A full URL (or a partial URI).
 			 *    An empty string indicates a bypass of this common restriction check.
 			 *    Defaults to a NULL value (indicating the current URI).
 			 *
-			 * @param null|string                  $ip Optional. An IP address matching the ``$user``.
+			 * @param null|string                 $ip Optional. An IP address matching the ``$user``.
 			 *    An empty string indicates a bypass of this common restriction check.
 			 *    Defaults to a NULL value (indicating the current ``$user->ip``).
 			 *
-			 * @param null|integer|\WP_User|users  $user Optional. The user we're testing.
+			 * @param null|integer|\WP_User|users $user Optional. The user we're testing.
 			 *
-			 * @param boolean                      $behave Optional. Defaults to a FALSE value.
+			 * @param boolean                     $behave Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, and failures occur, we WILL behave (when/if applicable); in whatever way we need to.
 			 *    In other words, ``$failures`` returned by this routine, are automatically analyzed, and behaviors are performed automatically.
 			 *    Behaviors are ONLY performed when/if applicable; as configured by a site owner (e.g. by one or more passtag restrictions).
 			 *
-			 * @param boolean                      $log Optional. Defaults to a FALSE value.
+			 * @param boolean                     $log Optional. Defaults to a FALSE value.
 			 *    If this is TRUE, we will log IP addresses and record uses (when/if applicable).
 			 *
-			 * @param string                       $log_identifier Optional. We can build this value dynamically if it is NOT passed in.
+			 * @param string                      $log_identifier Optional. We can build this value dynamically if it is NOT passed in.
 			 *    If this IS passed in, any logging that occurs will use this content identifier instead of an auto-generated value.
 			 *    If another primary check has already occurred, it should be passed in through this parameter.
 			 *
-			 * @param array                        $primary Optional. Defaults to an empty array.
+			 * @param array                       $primary Optional. Defaults to an empty array.
 			 *    If another primary check has already occurred, it should be passed in through this parameter.
 			 *    If passed in, this should include (at a minimum), these two array elements.
 			 *       • `type` = String indicating the primary type of restriction check.
 			 *       • `check` = Original array passed to {@link check_type()}.
 			 *
-			 * @param array                        $failures Optional. Defaults to an empty array.
+			 * @param array                       $failures Optional. Defaults to an empty array.
 			 *    If other failures have already occurred, they should be passed in through this parameter.
 			 *    These ``$failures`` will be considered during behavior handling; which is part of our finale here.
 			 *    If passed in, this should be an array of failures, as returned by {@link check_type()}.
 			 *
-			 * @param boolean                      $user_can_access Optional. Defaults to a FALSE value.
+			 * @param boolean                     $user_can_access Optional. Defaults to a FALSE value.
 			 *    If restrictions have already been checked (for another type); and access was granted; this should be set to a TRUE value.
 			 *    This value will be considered before we return a value from this routine; which all part of our finale here.
 			 *
@@ -640,7 +640,7 @@ namespace s2member
 							throw $this->©exception( // This should NOT happen.
 								$this->method(__FUNCTION__).'#unexpected_primary', get_defined_vars(),
 								$this->i18n('Unexpected `$primary` array values (invalid `type` or `check`).').
-								sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($primary))
+								' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($primary))
 							);
 					// Check URI restrictions (when/if applicable).
 
@@ -775,14 +775,14 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#unexpected_primary', get_defined_vars(),
 							$this->i18n('Unexpected `$primary` array values (missing `type` or `check`).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($primary))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($primary))
 						);
 					if($primary['type'] === 'profile_field') $behave = FALSE; // Never.
 
 					$collective_failure_data = array( // Default redirection argument data values.
-						'restriction_types' => array_keys($failures), 'passtag_restriction_ids' => array(),
-						'passtag_ids'       => array(), 'passtag_names' => array(),
-						'event_types'       => array(), 'uri' => $uri
+					                                  'restriction_types' => array_keys($failures), 'passtag_restriction_ids' => array(),
+					                                  'passtag_ids'       => array(), 'passtag_names' => array(),
+					                                  'event_types'       => array(), 'uri' => $uri
 					); // Also used as redirection arg data (in behavior handling).
 					$redirect_arg_data       =& $collective_failure_data; // Reference alias.
 
@@ -923,13 +923,13 @@ namespace s2member
 					if(headers_sent())
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#headers_sent_already', get_defined_vars(),
-							$this->i18n(' Doing it wrong! Headers have already been sent. Please check hook priorities.')
+							$this->i18n('Doing it wrong! Headers have already been sent. Please check hook priorities.')
 						);
 					$args             = array(); // Default arguments.
 					$default_arg_data = array( // Default arg data values.
-						'restriction_types' => array(), 'passtag_restriction_ids' => array(),
-						'passtag_ids'       => array(), 'passtag_names' => array(),
-						'event_types'       => array(), 'uri' => ''
+					                           'restriction_types' => array(), 'passtag_restriction_ids' => array(),
+					                           'passtag_ids'       => array(), 'passtag_names' => array(),
+					                           'event_types'       => array(), 'uri' => ''
 					); // Now check arg data types and merge.
 					$arg_data         = $this->check_extension_arg_types( // Validate these.
 						'array', 'array', 'array', 'array', 'array', 'string', $default_arg_data, $arg_data);
@@ -1070,13 +1070,13 @@ namespace s2member
 								throw $this->©exception(
 									$this->method(__FUNCTION__).'#invalid_group', get_defined_vars(),
 									$this->i18n('Invalid `$_group`. Expecting key NOT equal to `all`.').
-									sprintf($this->i18n(' Got: `%1$s`.'), $_group)
+									' '.sprintf($this->i18n('Got: `%1$s`.'), $_group)
 								);
 							if(!$this->©array->is_not_empty($_group_checks))
 								throw $this->©exception(
 									$this->method(__FUNCTION__).'#invalid_group_checks', get_defined_vars(),
 									$this->i18n('Invalid `$_group_checks`. Expecting `array` NOT empty.').
-									sprintf($this->i18n(' Got: %1$s`%2$s`.'), ((!$_group_checks) ? $this->i18n('empty').' ' : ''), gettype($_group_checks))
+									' '.sprintf($this->i18n('Got: %1$s`%2$s`.'), ((!$_group_checks) ? $this->i18n('empty').' ' : ''), gettype($_group_checks))
 								);
 							foreach($_group_checks as $_check) // Iterates each of the checks in this group.
 								{
@@ -1084,7 +1084,7 @@ namespace s2member
 										throw $this->©exception(
 											$this->method(__FUNCTION__).'#invalid_check', get_defined_vars(),
 											$this->i18n('Invalid `$_check`. Expecting `integer|string` NOT empty.').
-											sprintf($this->i18n(' Got: %1$s`%2$s`.'), ((!$_check) ? $this->i18n('empty').' ' : ''), gettype($_check))
+											' '.sprintf($this->i18n('Got: %1$s`%2$s`.'), ((!$_check) ? $this->i18n('empty').' ' : ''), gettype($_check))
 										);
 									// All restriction types support wildcard pattern matching.
 									// This search routine is always caSe sensitive (no exceptions).
@@ -1172,11 +1172,11 @@ namespace s2member
 											break; // Break loop in this scenario (no failures).
 										}
 									$_group_failure_data = array( // Record this as a failure.
-										'passtag_ids_granting_access'             => $passtag_ids_granting_access_to[$_group],
-										'passtag_names_granting_access'           => $passtag_names_granting_access_to[$_group],
-										'passtag_restriction_ids_guarding_access' => $passtag_restriction_ids_guarding_access_to[$_group],
-										'passtag_restriction_checks_triggered'    => $passtag_restriction_checks_triggered_in[$_group],
-										'passtag_restriction_patterns_triggered'  => $passtag_restriction_patterns_triggered_in[$_group]
+									                              'passtag_ids_granting_access'             => $passtag_ids_granting_access_to[$_group],
+									                              'passtag_names_granting_access'           => $passtag_names_granting_access_to[$_group],
+									                              'passtag_restriction_ids_guarding_access' => $passtag_restriction_ids_guarding_access_to[$_group],
+									                              'passtag_restriction_checks_triggered'    => $passtag_restriction_checks_triggered_in[$_group],
+									                              'passtag_restriction_patterns_triggered'  => $passtag_restriction_patterns_triggered_in[$_group]
 									); // May contain dupes. We run ``array_unique()`` before returning failures.
 
 									if(!empty($failures[$type])) // Merge with any existing failures on this type.

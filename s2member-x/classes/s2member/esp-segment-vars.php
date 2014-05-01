@@ -55,7 +55,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$map = array(); // Initialize map/array.
 
@@ -198,7 +198,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_segment_array', get_defined_vars(),
 							$this->i18n('Invalid `$segment` array (missing one or more keys).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($segment))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($segment))
 						);
 					if(isset($vars['by_segment_type_segment'][$segment['type']][$segment['value']]))
 						return $vars['by_segment_type_segment'][$segment['type']][$segment['value']];
@@ -224,7 +224,7 @@ namespace s2member
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#unexpected_esp_id_or_name', get_defined_vars(),
 							$this->i18n('Unexpected `$esp_id_or_name`. Unable to locate this ESP.').
-							sprintf($this->i18n(' Got: `%1$s`.'), $esp_id_or_name)
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $esp_id_or_name)
 						);
 					$db_cache_key = $this->method(__FUNCTION__).$esp->ID;
 

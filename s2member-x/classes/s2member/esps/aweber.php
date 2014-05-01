@@ -128,7 +128,7 @@ namespace s2member\esps
 						return $this->©error(
 							$this->method(__FUNCTION__), get_defined_vars(),
 							sprintf($this->i18n('AWeber® API call: `%1$s » %2$s`).'), $method, $url).
-							$this->i18n(' AWeber® NOT yet implemented by site owner.')
+							' '.$this->i18n('AWeber® NOT yet implemented by site owner.')
 						);
 					$method  = strtoupper($method);
 					$headers = array();
@@ -163,7 +163,7 @@ namespace s2member\esps
 					if(!is_array($response)) // Connection failure?
 						return $this->©error($this->method(__FUNCTION__), get_defined_vars(),
 						                     sprintf($this->i18n('AWeber® API call: `%1$s » %2$s`).'), $method, $url).
-						                     $this->i18n(' Connection failure.')
+						                     ' '.$this->i18n('Connection failure.')
 						);
 					$aweber = array(); // Initialize AWeber® response array.
 
@@ -200,13 +200,13 @@ namespace s2member\esps
 							if($error_code) // Error is NOT permissible.
 								return $this->©error($this->method(__FUNCTION__), get_defined_vars(),
 								                     sprintf($this->i18n('AWeber® API call: `%1$s » %2$s`).'), $method, $url).
-								                     sprintf($this->i18n(' Error code: `%1$s`.'), $error_code).
-								                     sprintf($this->i18n(' Message: `%1$s`.'), $error_message)
+								                     ' '.sprintf($this->i18n('Error code: `%1$s`.'), $error_code).
+								                     ' '.sprintf($this->i18n('Message: `%1$s`.'), $error_message)
 								);
 						}
 					$this->©success($this->method(__FUNCTION__), get_defined_vars(),
 					                sprintf($this->i18n('AWeber® API call: `%1$s » %2$s`).'), $method, $url).
-					                $this->i18n(' Status: `success`.')
+					                ' '.$this->i18n('Status: `success`.')
 					);
 					if(empty($aweber)) return TRUE; // Assume success.
 
@@ -365,7 +365,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$ad_tracking = $this->©url->current_host();
 					$ad_tracking = $this->apply_filters('ad_tracking', $ad_tracking, get_defined_vars());
@@ -373,12 +373,12 @@ namespace s2member\esps
 
 					$vars = array_merge(
 						array(
-						     'ws.op'         => 'create',
-						     'ip_address'    => $user->ip,
-						     'email'         => $user->email,
-						     'name'          => (string)substr($user->full_name, 0, 50),
-						     'ad_tracking'   => (string)substr($ad_tracking, 0, 20),
-						     'custom_fields' => $merge_vars
+							'ws.op'         => 'create',
+							'ip_address'    => $user->ip,
+							'email'         => $user->email,
+							'name'          => (string)substr($user->full_name, 0, 50),
+							'ad_tracking'   => (string)substr($ad_tracking, 0, 20),
+							'custom_fields' => $merge_vars
 						), $other_vars
 					);
 					if(empty($vars['custom_fields'])) // Remove if empty.
@@ -427,7 +427,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($segment)) // All subscribed segments?
 						{
@@ -457,9 +457,9 @@ namespace s2member\esps
 
 							$_vars = array_merge(
 								array(
-								     'email'         => $user->email,
-								     'name'          => (string)substr($user->full_name, 0, 50),
-								     'custom_fields' => $_merge_vars
+									'email'         => $user->email,
+									'name'          => (string)substr($user->full_name, 0, 50),
+									'custom_fields' => $_merge_vars
 								), $other_vars
 							);
 							if(empty($_vars['custom_fields'])) // Remove if empty.
@@ -512,7 +512,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($segment)) // All subscribed segments?
 						{
@@ -577,12 +577,12 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$vars         = array_merge(
 						array(
-						     'ws.op' => 'find',
-						     'email' => $user->email
+							'ws.op' => 'find',
+							'email' => $user->email
 						), $other_vars
 					);
 					$api_response = $this->api_response(
@@ -626,12 +626,12 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$vars         = array_merge(
 						array(
-						     'ws.op' => 'findSubscribers',
-						     'email' => $user->email
+							'ws.op' => 'findSubscribers',
+							'email' => $user->email
 						), $other_vars
 					);
 					$api_response = $this->api_response(
@@ -717,7 +717,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($old_segment)) // All subscribed segments?
 						{
@@ -741,8 +741,8 @@ namespace s2member\esps
 								{
 									$_vars         = array_merge(
 										array(
-										     'ws.op'     => 'move',
-										     'list_link' => $this->api_url.'/accounts/'.$this->account_id().'/lists/'.$new_segment['id']
+											'ws.op'     => 'move',
+											'list_link' => $this->api_url.'/accounts/'.$this->account_id().'/lists/'.$new_segment['id']
 										), $other_vars_move
 									);
 									$_api_response = $this->api_response(
@@ -765,10 +765,10 @@ namespace s2member\esps
 			/**
 			 * Merge vars for a particular segment.
 			 *
-			 * @param string|array                 $segment AWeber® segment specs.
+			 * @param string|array $segment AWeber® segment specs.
 			 *    Either a string, or an already parsed array of segment specs.
 			 *
-			 * @param array                        $other_vars Optional. Defaults to an empty array.
+			 * @param array        $other_vars Optional. Defaults to an empty array.
 			 *    Any other vars that are accepted by the underlying AWeber® API call in this routine.
 			 *
 			 * @see https://labs.aweber.com/docs/reference/1.0#custom_fields
@@ -830,7 +830,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$merge_vars = array(); // Initialize.
 
@@ -877,7 +877,7 @@ namespace s2member\esps
 							throw $this->©exception(
 								$this->method(__FUNCTION__).'#invalid_segment_array', get_defined_vars(),
 								$this->i18n('Invalid `$segment` array (missing one or more keys).').
-								sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($segment))
+								' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($segment))
 							);
 						} // Else we need to parse this string.
 					$splits = preg_split('/\:\:/', $segment, 3, PREG_SPLIT_NO_EMPTY);

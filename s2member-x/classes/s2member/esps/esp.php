@@ -59,7 +59,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#unexpected_esp_name', get_defined_vars(),
 							$this->i18n('Unexpected ESP `$name`. Unable to locate an ID for this ESP.').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->name)
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->name)
 						);
 				}
 

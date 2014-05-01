@@ -114,7 +114,7 @@ namespace s2member
 							if(!$this->©integer->is_not_empty($_passtag_id))
 								throw $this->©exception($this->method(__FUNCTION__).'#invalid_passtag_id', get_defined_vars(),
 								                        $this->i18n('Expecting a non-empty integer `$_passtag_id` value.').
-								                        sprintf($this->i18n(' Got: `%1$s`.'), gettype($_passtag_id))
+								                        ' '.sprintf($this->i18n('Got: `%1$s`.'), gettype($_passtag_id))
 								);
 							switch($type) // Handle this based on relationship type.
 							{
@@ -165,7 +165,7 @@ namespace s2member
 									throw $this->©exception(
 										$this->method(__FUNCTION__).'#invalid_relationship_type', get_defined_vars(),
 										$this->i18n('Invalid relationship `$type`. Expecting one of: `siblings|descendants|ancestors`.').
-										sprintf($this->i18n(' Got: `%1$s`.'), $type)
+										' '.sprintf($this->i18n('Got: `%1$s`.'), $type)
 									);
 							}
 						}

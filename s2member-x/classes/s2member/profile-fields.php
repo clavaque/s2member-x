@@ -65,7 +65,7 @@ namespace s2member
 								throw $this->©exception(
 									$this->method(__FUNCTION__).'#unexpected_profile_field_id', get_defined_vars(),
 									$this->i18n('Unexpected profile field ID. Profile field is missing.').
-									sprintf($this->i18n(' Got: `%1$s`.'), $_profile_field_id)
+									' '.sprintf($this->i18n('Got: `%1$s`.'), $_profile_field_id)
 								);
 							$form_fields[$_profile_field->name] = array();
 							$_form_field_config                 =& $form_fields[$_profile_field->name];
@@ -87,7 +87,7 @@ namespace s2member
 							if(!$this->is_writable($_profile_field->ID, $user, $reader_writer, $this::context_registration))
 								{
 									if($_form_field_config['label']) // This additional text can be modified via filters.
-										$_form_field_config['label'] .= $this->apply_filters('uneditable', $this->translate(' — uneditable'), get_defined_vars());
+										$_form_field_config['label'] .= ' '.$this->apply_filters('uneditable', $this->translate('— uneditable'), get_defined_vars());
 									$_form_field_config['disabled'] = TRUE; // Read only.
 								}
 							unset($_form_field_config['validation_patterns'], $_form_field_config['options'], $_form_field_config['use_update_marker']);
@@ -247,7 +247,7 @@ namespace s2member
 								throw $this->©exception(
 									$this->method(__FUNCTION__).'#unexpected_profile_field_id', get_defined_vars(),
 									$this->i18n('Unexpected profile field ID. Profile field is missing.').
-									sprintf($this->i18n(' Got: `%1$s`.'), $_profile_field_id)
+									' '.sprintf($this->i18n('Got: `%1$s`.'), $_profile_field_id)
 								);
 							$form_fields[$_profile_field->name] = array();
 							$_form_field_config                 =& $form_fields[$_profile_field->name];
@@ -269,7 +269,7 @@ namespace s2member
 							if(!$this->is_writable($_profile_field->ID, $user, $reader_writer, $this::context_profile_updates))
 								{
 									if($_form_field_config['label']) // This additional text can be modified via filters.
-										$_form_field_config['label'] .= $this->apply_filters('uneditable', $this->translate(' — uneditable'), get_defined_vars());
+										$_form_field_config['label'] .= ' '.$this->apply_filters('uneditable', $this->translate('— uneditable'), get_defined_vars());
 									$_form_field_config['disabled'] = TRUE; // Read only.
 								}
 							unset($_form_field_config['validation_patterns'], $_form_field_config['options'], $_form_field_config['use_update_marker']);

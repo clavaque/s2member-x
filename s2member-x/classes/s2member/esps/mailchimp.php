@@ -115,7 +115,7 @@ namespace s2member\esps
 						return $this->©error(
 							$this->method(__FUNCTION__), get_defined_vars(),
 							sprintf($this->i18n('MailChimp® API call: `%1$s`).'), $method).
-							$this->i18n(' MailChimp® NOT yet implemented by site owner.')
+							' '.$this->i18n('MailChimp® NOT yet implemented by site owner.')
 						);
 					$url = add_query_arg(urlencode_deep(array('method' => $method)), $this->api_url);
 
@@ -160,13 +160,13 @@ namespace s2member\esps
 							if($error_code) // Error is NOT permissible.
 								return $this->©error($this->method(__FUNCTION__), get_defined_vars(),
 								                     sprintf($this->i18n('MailChimp® API call: `%1$s`.'), $method).
-								                     sprintf($this->i18n(' Error code: `%1$s`.'), $error_code).
-								                     sprintf($this->i18n(' Message: `%1$s`.'), $error_message)
+								                     ' '.sprintf($this->i18n('Error code: `%1$s`.'), $error_code).
+								                     ' '.sprintf($this->i18n('Message: `%1$s`.'), $error_message)
 								);
 						}
 					$this->©success($this->method(__FUNCTION__), get_defined_vars(),
 					                sprintf($this->i18n('MailChimp® API call: `%1$s`.'), $method).
-					                $this->i18n(' Status: `success`.')
+					                ' '.$this->i18n('Status: `success`.')
 					);
 					if(empty($mailchimp)) return TRUE; // Assume success.
 
@@ -209,34 +209,34 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$merge_vars = $this->map_merge_vars($segment, $user);
 
 					if($segment['grouping'] && $segment['groups'])
 						$merge_vars = array_merge(
 							$merge_vars, array(
-							                  'GROUPINGS' => array(
-								                  array(
-									                  'name'   => $segment['grouping'],
-									                  'groups' => implode(',', str_replace(',', '\\,', $segment['groups']))
-								                  )
-							                  )
-							             )
+								'GROUPINGS' => array(
+									array(
+										'name'   => $segment['grouping'],
+										'groups' => implode(',', str_replace(',', '\\,', $segment['groups']))
+									)
+								)
+							)
 						);
 					$vars = array_merge(
 						array(
-						     'id'                => $segment['id'],
-						     'email_address'     => $user->email,
-						     'merge_vars'        => $merge_vars,
-						     'update_existing'   => TRUE,
-						     'replace_interests' => TRUE
+							'id'                => $segment['id'],
+							'email_address'     => $user->email,
+							'merge_vars'        => $merge_vars,
+							'update_existing'   => TRUE,
+							'replace_interests' => TRUE
 						), $other_vars
 					);
 					if($silently) // Silently?
 						$vars = array_merge(array(
-						                         'double_optin' => FALSE,
-						                         'send_welcome' => FALSE
+							                    'double_optin' => FALSE,
+							                    'send_welcome' => FALSE
 						                    ), $vars);
 					$api_response = $this->api_response('listSubscribe', $vars);
 
@@ -284,7 +284,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($segment)) // All subscribed segments?
 						{
@@ -315,10 +315,10 @@ namespace s2member\esps
 
 							$_vars         = array_merge(
 								array(
-								     'id'                => $_segment['id'],
-								     'email_address'     => $_info['id'],
-								     'merge_vars'        => $_merge_vars,
-								     'replace_interests' => FALSE
+									'id'                => $_segment['id'],
+									'email_address'     => $_info['id'],
+									'merge_vars'        => $_merge_vars,
+									'replace_interests' => FALSE
 								), $other_vars
 							);
 							$_api_response = $this->api_response('listUpdateMember', $_vars);
@@ -369,7 +369,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($segment)) // All subscribed segments?
 						{
@@ -384,13 +384,13 @@ namespace s2member\esps
 
 							$_vars = array_merge(
 								array(
-								     'id'            => $_segment['id'],
-								     'email_address' => $user->email,
+									'id'            => $_segment['id'],
+									'email_address' => $user->email,
 								), $other_vars
 							);
 							if($silently) $_vars = array_merge(array(
-							                                        'send_goodbye' => FALSE,
-							                                        'send_notify'  => FALSE
+								                                   'send_goodbye' => FALSE,
+								                                   'send_notify'  => FALSE
 							                                   ), $_vars);
 
 							$_api_response = $this->api_response('listUnsubscribe', $_vars);
@@ -443,12 +443,12 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$vars         = array_merge(
 						array(
-						     'id'            => $segment['id'],
-						     'email_address' => $user->email
+							'id'            => $segment['id'],
+							'email_address' => $user->email
 						), $other_vars
 					);
 					$api_response = $this->api_response('listMemberInfo', $vars);
@@ -494,11 +494,11 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$vars         = array_merge(
 						array(
-						     'email_address' => $user->email
+							'email_address' => $user->email
 						), $other_vars
 					);
 					$api_response = $this->api_response('listsForEmail', $vars);
@@ -578,7 +578,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					if(is_null($old_segment)) // All subscribed segments?
 						{
@@ -619,10 +619,10 @@ namespace s2member\esps
 			/**
 			 * Merge vars for a particular segment.
 			 *
-			 * @param string|array                 $segment MailChimp® segment specs.
+			 * @param string|array $segment MailChimp® segment specs.
 			 *    Either a string, or an already parsed array of segment specs.
 			 *
-			 * @param array                        $other_vars Optional. Defaults to an empty array.
+			 * @param array        $other_vars Optional. Defaults to an empty array.
 			 *    Any other vars that are accepted by the underlying MailChimp® API call in this routine.
 			 *
 			 * @see http://apidocs.mailchimp.com/api/1.3/listmemberinfo.func.php
@@ -689,7 +689,7 @@ namespace s2member\esps
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#email_missing', get_defined_vars(),
 							$this->i18n('The `$user` is NOT populated yet (email missing).').
-							$this->i18n(' There is no `email` address to work with.')
+							' '.$this->i18n('There is no `email` address to work with.')
 						);
 					$merge_vars = array(
 						'OPTIN_IP'   => $user->ip,
@@ -745,7 +745,7 @@ namespace s2member\esps
 							throw $this->©exception(
 								$this->method(__FUNCTION__).'#invalid_segment_array', get_defined_vars(),
 								$this->i18n('Invalid `$segment` array (missing one or more keys).').
-								sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($segment))
+								' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($segment))
 							);
 						} // Else we need to parse this string.
 					$splits = preg_split('/\:\:/', $segment, 3, PREG_SPLIT_NO_EMPTY);

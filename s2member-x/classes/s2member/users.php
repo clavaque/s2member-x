@@ -145,17 +145,17 @@ namespace s2member
 					if($this->has_id()) // ID/username?
 						$session_data = array_merge($session_data,
 						                            array(
-						                                 'ID'       => $this->ID,
-						                                 'username' => $this->username
+							                            'ID'       => $this->ID,
+							                            'username' => $this->username
 						                            ));
 					if($this->is_populated()) // Other?
 						$session_data = array_merge($session_data,
 						                            array(
-						                                 'email'        => $this->email,
-						                                 'first_name'   => $this->first_name,
-						                                 'last_name'    => $this->last_name,
-						                                 'full_name'    => $this->full_name,
-						                                 'display_name' => $this->display_name
+							                            'email'        => $this->email,
+							                            'first_name'   => $this->first_name,
+							                            'last_name'    => $this->last_name,
+							                            'full_name'    => $this->full_name,
+							                            'display_name' => $this->display_name
 						                            ));
 					$session_data['access_keys'] = array(); // Initialize access keys.
 					$access_key                  = $this->©vars->_REQUEST($this->___instance_config->plugin_var_ns.'_access_key');
@@ -598,7 +598,7 @@ namespace s2member
 			/**
 			 * Updates additional profile fields implemented by site owners.
 			 *
-			 * @param array  $profile_field_values An associative array of profile fields (by code).
+			 * @param array $profile_field_values An associative array of profile fields (by code).
 			 *
 			 * @return boolean|\websharks_core_v000000_dev\errors TRUE on success; else an errors object on failure.
 			 *
@@ -816,8 +816,8 @@ namespace s2member
 					unset($_possible_user_passtag); // Housekeeping.
 
 					$default_args = array( // NULL = no filter.
-						'id_or_access_key' => NULL, 'passtag_id_or_name' => NULL,
-						'order_session_id' => NULL, 'transaction_id' => NULL, '+descendants' => FALSE
+					                       'id_or_access_key' => NULL, 'passtag_id_or_name' => NULL,
+					                       'order_session_id' => NULL, 'transaction_id' => NULL, '+descendants' => FALSE
 					);
 					$args         = $this->check_extension_arg_types( // Validates each argument value.
 						array('null', 'integer:!empty', 'string:!empty', 'array:!empty'), // User passtag reference(s).
@@ -1854,7 +1854,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_between_range', array_merge(get_defined_vars(), array('user' => $this)),
 							$this->i18n('Invalid `$between` date range (please use `#between::from::to` with UTC timestamps).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($between))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($between))
 						);
 					if($between) $between = array('from' => (integer)$between[1], 'to' => (integer)$between[2]);
 
@@ -1891,7 +1891,7 @@ namespace s2member
 									throw $this->©exception( // This should NOT happen.
 										$this->method(__FUNCTION__).'#invalid_logic_type', array_merge(get_defined_vars(), array('user' => $this)),
 										$this->i18n('Invalid `$logic` type (please use a core constant for this value).').
-										sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($logic))
+										' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($logic))
 									);
 							}
 						}
@@ -2047,7 +2047,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_between_range', array_merge(get_defined_vars(), array('user' => $this)),
 							$this->i18n('Invalid `$between` date range (please use `#between::from::to` with UTC timestamps).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($between))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($between))
 						);
 					if($between) $between = array('from' => (integer)$between[1], 'to' => (integer)$between[2]);
 
@@ -2084,7 +2084,7 @@ namespace s2member
 									throw $this->©exception( // This should NOT happen.
 										$this->method(__FUNCTION__).'#invalid_logic_type', array_merge(get_defined_vars(), array('user' => $this)),
 										$this->i18n('Invalid `$logic` type (please use a core constant for this value).').
-										sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($logic))
+										' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($logic))
 									);
 							}
 						}
@@ -2259,7 +2259,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_between_range', array_merge(get_defined_vars(), array('user' => $this)),
 							$this->i18n('Invalid `$between` date range (please use `#between::from::to` with UTC timestamps).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($between))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($between))
 						);
 					if($between) $between = array('from' => (integer)$between[1], 'to' => (integer)$between[2]);
 
@@ -2296,7 +2296,7 @@ namespace s2member
 									throw $this->©exception( // This should NOT happen.
 										$this->method(__FUNCTION__).'#invalid_logic_type', array_merge(get_defined_vars(), array('user' => $this)),
 										$this->i18n('Invalid `$logic` type (please use a core constant for this value).').
-										sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($logic))
+										' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($logic))
 									);
 							}
 						}
@@ -2439,7 +2439,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_between_range', array_merge(get_defined_vars(), array('user' => $this)),
 							$this->i18n('Invalid `$between` date range (please use `#between::from::to` with UTC timestamps).').
-							sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($between))
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($between))
 						);
 					if($between) $between = array('from' => (integer)$between[1], 'to' => (integer)$between[2]);
 
@@ -2476,7 +2476,7 @@ namespace s2member
 									throw $this->©exception( // This should NOT happen.
 										$this->method(__FUNCTION__).'#invalid_logic_type', array_merge(get_defined_vars(), array('user' => $this)),
 										$this->i18n('Invalid `$logic` type (please use a core constant for this value).').
-										sprintf($this->i18n(' Got: `%1$s`.'), $this->©var->dump($logic))
+										' '.sprintf($this->i18n('Got: `%1$s`.'), $this->©var->dump($logic))
 									);
 							}
 						}
@@ -2625,13 +2625,13 @@ namespace s2member
 											sprintf($this->i18n('Invalid. Missing passtag ID: `%1$s`.'), $_passtag_id)
 										);
 									$_columns = array( // A new database row.
-										'access_key'       => $this->©encryption->keygen(),
-										'passtag_id'       => $_passtag->ID, // For this passtag.
-										'user_id'          => (($this->has_id()) ? $this->ID : NULL),
-										'order_session_id' => $order_session_id, 'transaction_id' => $transaction_id,
-										'time_created'     => time(), 'time_starts' => time() + $_passtag->time_starts_offset,
-										'time_stops'       => (($_passtag->time_stops_offset >= 0) ? time() + $_passtag->time_stops_offset : -1),
-										'eot_time_stops'   => NULL, // Be sure we end up with this property for events below.
+									                   'access_key'       => $this->©encryption->keygen(),
+									                   'passtag_id'       => $_passtag->ID, // For this passtag.
+									                   'user_id'          => (($this->has_id()) ? $this->ID : NULL),
+									                   'order_session_id' => $order_session_id, 'transaction_id' => $transaction_id,
+									                   'time_created'     => time(), 'time_starts' => time() + $_passtag->time_starts_offset,
+									                   'time_stops'       => (($_passtag->time_stops_offset >= 0) ? time() + $_passtag->time_stops_offset : -1),
+									                   'eot_time_stops'   => NULL, // Be sure we end up with this property for events below.
 									);
 									if(!$this->©db->insert($this->©db_tables->get('user_passtags'), $_columns) || !($_user_passtag_id = $this->©db->insert_id))
 										throw $this->©exception($this->method(__FUNCTION__).'#insertion_failure', array_merge(get_defined_vars(), array('user' => $this)),
@@ -2679,12 +2679,12 @@ namespace s2member
 			 *    In addition, this will remove ALL user passtags having an underlying passtag which is a descendant of
 			 *    the passtag ID or name you are removing/deactivating (e.g. all DESCENDANTS automatically).
 			 *
-			 * @param integer|string       $passtag_id_or_name Passtag ID or name (required).
+			 * @param integer|string $passtag_id_or_name Passtag ID or name (required).
 			 *
-			 * @param null|integer         $eot_time_stops Optional. Defaults to NULL (indicating current time).
+			 * @param null|integer   $eot_time_stops Optional. Defaults to NULL (indicating current time).
 			 *    If defined, user passtag deactivations will EOT at this time; NOT current time.
 			 *
-			 * @param array                $args Optional. Any additional search criteria.
+			 * @param array          $args Optional. Any additional search criteria.
 			 *    Search criteria may include any combination of the following array keys.
 			 *       See: {@link passtags_for()} for further details on this.
 			 *
@@ -2715,12 +2715,12 @@ namespace s2member
 			 *
 			 * @note Use with CAUTION :-) This will remove/deactivate ALL user passtags with the underlying passtag ID (or name).
 			 *
-			 * @param integer|string       $passtag_id_or_name Passtag ID or name (required).
+			 * @param integer|string $passtag_id_or_name Passtag ID or name (required).
 			 *
-			 * @param null|integer         $eot_time_stops Optional. Defaults to NULL (indicating current time).
+			 * @param null|integer   $eot_time_stops Optional. Defaults to NULL (indicating current time).
 			 *    If defined, user passtag deactivations will EOT at this time; NOT current time.
 			 *
-			 * @param array                $args Optional. Any additional search criteria.
+			 * @param array          $args Optional. Any additional search criteria.
 			 *    Search criteria may include any combination of the following array keys.
 			 *       See: {@link passtags_for()} for further details on this.
 			 *
@@ -3236,7 +3236,7 @@ namespace s2member
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#invalid_time', array_merge(get_defined_vars(), array('user' => $this)),
 							sprintf($this->i18n('Invalid renewal time (e.g. `time_stops`): `%1$s`.'), $time_stops).
-							$this->i18n(' A renewal (by definition) indicates there should be MORE time.')
+							' '.$this->i18n('A renewal (by definition) indicates there should be MORE time.')
 						);
 					foreach($this->passtags_for($args) as $_user_passtag) // User passtags (based on search criteria).
 						{

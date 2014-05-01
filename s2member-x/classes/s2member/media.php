@@ -141,7 +141,8 @@ namespace s2member
 					if(is_null($file) && !($file = $this->is_file()))
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#unable_to_acquire_file', get_defined_vars(),
-							$this->i18n('Unable to acquire `$file`.').sprintf($this->i18n(' Got: `%1$s`.'), $file)
+							$this->i18n('Unable to acquire `$file`.').
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					return $this->©dir->private_media().'/'.$this->sanitize_file($file);
 				}
@@ -165,7 +166,8 @@ namespace s2member
 					if(is_null($file) && !($file = $this->is_file()))
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#unable_to_acquire_file', get_defined_vars(),
-							$this->i18n('Unable to acquire `$file`.').sprintf($this->i18n(' Got: `%1$s`.'), $file)
+							$this->i18n('Unable to acquire `$file`.').
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					$file = ltrim($this->©dir->n_seps($file), '/'); // Force relative.
 
@@ -178,13 +180,13 @@ namespace s2member
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#dot_files', get_defined_vars(),
 							$this->i18n('Invalid `$file` specification. Files may NOT begin with a dot: `.`.').
-							sprintf($this->i18n(' Got: `%1$s`.'), $file)
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					if(strpos($file, '..') !== FALSE)
 						throw $this->©exception(
 							$this->method(__FUNCTION__).'#double_dots', get_defined_vars(),
 							$this->i18n('Invalid `$file` specification. Files may NOT contain double dots: `..`.').
-							sprintf($this->i18n(' Got: `%1$s`.'), $file)
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					return $file; // Sanitized file specification.
 				}
@@ -216,7 +218,8 @@ namespace s2member
 					if(is_null($file) && !($file = $this->is_file()))
 						throw $this->©exception( // This should NOT happen.
 							$this->method(__FUNCTION__).'#unable_to_acquire_file', get_defined_vars(),
-							$this->i18n('Unable to acquire `$file`.').sprintf($this->i18n(' Got: `%1$s`.'), $file)
+							$this->i18n('Unable to acquire `$file`.').
+							' '.sprintf($this->i18n('Got: `%1$s`.'), $file)
 						);
 					$file = $this->sanitize_file($file);
 
@@ -420,11 +423,11 @@ namespace s2member
 					else $url = 'http'.(($secure) ? 's' : '').'://'.$downloads_cname_distro.'/'.str_ireplace('%2F', '/', rawurlencode($file));
 
 					$policy = array('Statement' =>
-					                array( // Array of statements.
-						                array('Resource'  => $resource,
-						                      'Condition' => array('IpAddress'    => array('AWS:SourceIp' => $user->ip.'/32'),
-						                                           'DateLessThan' => array('AWS:EpochTime' => $expires_time)))
-					                ));
+						                array( // Array of statements.
+						                       array('Resource'  => $resource,
+						                             'Condition' => array('IpAddress'    => array('AWS:SourceIp' => $user->ip.'/32'),
+						                                                  'DateLessThan' => array('AWS:EpochTime' => $expires_time)))
+						                ));
 					if($this->©env->is_localhost())
 						unset($policy['Statement'][0]['Condition']['IpAddress']);
 					$policy = json_encode($policy); // Always JSON encode the policy.
@@ -704,13 +707,20 @@ namespace s2member
 					else $base = '/'; // Default value.
 
 					$rules = // Builds `.htaccess` rewrite rules.
+
+						// Breaking this up into multiple chunks because PhpStorm
+						// has trouble parsing the entire string at once.
+
 						'Options +FollowSymLinks -Indexes'."\n".
 
-						'<IfModule mod_env.c>'."\n".
+						'<IfModule env_module>'."\n".
 						"\t".'SetEnv no-gzip 1'."\n".
-						'</IfModule>'."\n".
+						'</IfModule>'."\n";
 
-						'<IfModule mod_rewrite.c>'."\n".
+					$rules .= // Builds `.htaccess` rewrite rules.
+
+						'<IfModule rewrite_module>'."\n".
+
 						"\t".'RewriteEngine On'."\n".
 						"\t".'RewriteBase '.$base."\n".
 
@@ -719,7 +729,9 @@ namespace s2member
 
 						"\t".'RewriteCond %{ENV:'.$this->var_name('wp_vdir_check').'} !^complete$'."\n".
 						"\t".'RewriteCond %{THE_REQUEST} ^(?:GET|HEAD)(?:[\ ]+)(?:'.preg_quote($base, ' ').')([a-zA-Z0-9_\-]+/)(?:wp-content/)'."\n".
-						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('wp_vdir').':,E='.$this->var_name('wp_vdir').':%1,E='.$this->var_name('wp_vdir_check').':complete]'."\n".
+						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('wp_vdir').':,E='.$this->var_name('wp_vdir').':%1,E='.$this->var_name('wp_vdir_check').':complete]'."\n";
+
+					$rules .= // Builds `.htaccess` rewrite rules.
 
 						"\t".'RewriteCond %{ENV:'.$this->var_name('file').'} ^(.*?)(?:'.preg_quote($this->rewrite_spec_name('inline'), ' ').'/)(.+)$'."\n".
 						"\t".'RewriteRule ^(.*)$ - [N,E='.$this->var_name('file').':,E='.$this->var_name('file').':%1%2,E='.$this->var_name('inline').':,E='.$this->var_name('inline').':&'.$this->var_name('inline').'=yes]'."\n".
@@ -742,7 +754,9 @@ namespace s2member
 						"\t".'RewriteRule ^(.*)$ - [N,E='.$this->var_name('file').':,E='.$this->var_name('file').':%1%3,E='.$this->var_name('secure').':,E='.$this->var_name('secure').':&'.$this->var_name('secure').'=%2]'."\n".
 
 						"\t".'RewriteCond %{ENV:'.$this->var_name('file').'} ^(.*?)(?:'.preg_quote($this->rewrite_spec_name('storage'), ' ').'-(.+?)/)(.+)$'."\n".
-						"\t".'RewriteRule ^(.*)$ - [N,E='.$this->var_name('file').':,E='.$this->var_name('file').':%1%3,E='.$this->var_name('storage').':,E='.$this->var_name('storage').':&'.$this->var_name('storage').'=%2]'."\n".
+						"\t".'RewriteRule ^(.*)$ - [N,E='.$this->var_name('file').':,E='.$this->var_name('file').':%1%3,E='.$this->var_name('storage').':,E='.$this->var_name('storage').':&'.$this->var_name('storage').'=%2]'."\n";
+
+					$rules .= // Builds `.htaccess` rewrite rules.
 
 						"\t".'RewriteCond %{ENV:'.$this->var_name('wp_vdir').'} ^0$'."\n".
 						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('wp_vdir').':]'."\n".
@@ -760,12 +774,17 @@ namespace s2member
 						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('secure').':]'."\n".
 
 						"\t".'RewriteCond %{ENV:'.$this->var_name('storage').'} ^0$'."\n".
-						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('storage').':]'."\n".
+						"\t".'RewriteRule ^(.*)$ - [E='.$this->var_name('storage').':]'."\n";
+
+					$rules .= // Builds `.htaccess` rewrite rules.
 
 						"\t".'RewriteRule ^(.*)$ %{ENV:'.$this->var_name('wp_vdir').'}?'.$this->var_name('file').'=%{ENV:'.$this->var_name('file').'}%{ENV:'.$this->var_name('inline').'}%{ENV:'.$this->var_name('remote').'}%{ENV:'.$this->var_name('stream').'}%{ENV:'.$this->var_name('secure').'}%{ENV:'.$this->var_name('storage').'} [QSA,L]'."\n".
-						'</IfModule>'."\n".
 
-						'<IfModule !mod_rewrite.c>'."\n".
+						'</IfModule>'."\n";
+
+					$rules .= // Builds `.htaccess` rewrite rules.
+
+						'<IfModule !rewrite_module>'."\n".
 						"\t".'deny from all'."\n".
 						'</IfModule>';
 
@@ -823,7 +842,7 @@ namespace s2member
 
 					$rules = // Builds our no GZIP rules.
 						$start_line."\n".
-						'<IfModule mod_rewrite.c>'."\n".
+						'<IfModule rewrite_module>'."\n".
 						"\t".'RewriteEngine On'."\n".
 						"\t".'RewriteBase '.$base."\n".
 						"\t".'RewriteCond %{QUERY_STRING} (^|\?|&)'.preg_quote($this->var_name('file'), ' ').'\=.+ [OR]'."\n".
