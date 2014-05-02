@@ -194,7 +194,7 @@ namespace s2member
 
 					check_conditions: // Target point.
 
-					if($handler->conditions && !$this->©php->¤eval('if('.$handler->conditions.') echo 1;', $meta_vars + $vars))
+					if($handler->conditions && !$this->©php->¤eval('return ('.$handler->conditions.');', $meta_vars + $vars))
 						goto finale; // Conditions (when they exist); MUST evaluate to TRUE; else stop here.
 
 					# Event should be processed now; or in the future?
@@ -475,6 +475,8 @@ namespace s2member
 			 * @throws exception If invalid types are passed through arguments list.
 			 * @throws exception If ``$id_or_name`` is empty for some reason.
 			 * @throws exception If ``$meta_vars`` is empty.
+			 *
+			 * @TODO Need to finalize this method by identifying overlapping event handlers.
 			 */
 			public function is_overlapping($id_or_name, $meta_vars, $vars)
 				{

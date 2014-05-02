@@ -296,7 +296,7 @@ namespace s2member
 						if(strpos($_key, '_') === 0) unset($vars[$_key]);
 					unset($_key, $_var); // Ditch temp vars.
 
-					validate_backtrace_max_triggers: // Target point (`debug_backtrace`).
+					validate_backtrace_max_triggers: // Target point.
 
 					$triggers = 0; // Backtrace # of triggers that got us here.
 
